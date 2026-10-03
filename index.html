@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приглашение в кино 🎬</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 620px;
+      width: 100%;
+      position: relative;
+      animation: fadeIn 1.3s ease;
+    }
+
+    .hidden { display: none; }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 0 20px;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      opacity: 0.95;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 16px 38px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      user-select: none;
+    }
+
+    #yes {
+      background: linear-gradient(45deg, #ff4d6d, #ff7aa2);
+      color: white;
+      box-shadow: 0 10px 30px rgba(255, 90, 120, 0.45);
+    }
+
+    #yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 15px 40px rgba(255, 90, 120, 0.6);
+    }
+
+    #no {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: #fff;
+      position: relative;
+    }
+
+    #no:hover {
+      transform: scale(1.04);
+    }
+
+    .details {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 24px 18px;
+      margin-top: 28px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+
+    .details h2 {
+      margin: 0 0 18px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .details p {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+    }
+
+    .photo {
+      display: block;
+      width: min(100%, 420px);
+      margin: 28px auto 0;
+      border-radius: 22px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+      object-fit: cover;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: floatUp 2.8s ease-in forwards;
+      z-index: 9;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    #success h1 {
+      animation: bounce 1s ease;
+    }
+
+    @media (max-width: 480px) {
+      .buttons {
+        gap: 12px;
+      }
+      button {
+        width: 100%;
+        max-width: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="question">
+    <h1>Привет, Мария 💕</h1>
+    <h1>Любимый котенок 💕</h1>
+    <p>У меня к тебе один очень важный вопрос...</p>
+    <h1>Пойдёшь со мной в кино? 🎬</h1>
+
+    <div class="buttons">
+      <button id="yes">Да! 🥰</button>
+      <button id="no">Нет</button>
+    </div>
+  </div>
+
+  <div class="container hidden" id="success">
+    <h1>Урааа! 🎉</h1>
+    <p>Я знал, что ты согласишься 😊</p>
+    <h1>Клево)))</h1>
+    <p>Обещаю целоваться!!!</p>
+
+    <div class="details">
+      <h2>🎥 Фильм: «Сумерки»</h2>
+      <p>📍 Кинотеатр: Каро Sky 17 Авиапарк</p>
+      <p>🕐 Время: Вторник, 19:05</p>
+      <p>Жду с нетерпением! 💖</p>
+    </div>
+
+    <img
+      class="photo"
+      src="https://www.ekzotika.com/ekzotika_img/board/394/big/394114_500x375.jpg"
+      alt="Котёнок"
+      referrerpolicy="no-referrer"
+    />
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const question = document.getElementById("question");
+    const success = document.getElementById("success");
+
+    const noTexts = [
+      "Нет",
+      "Точно нет?",
+      "Подумай ещё 🤔",
+      "Ну пожалуйста!",
+      "Я расстроюсь 😢",
+      "Последний шанс!",
+      "Нуууу..."
+    ];
+
+    let noCount = 0;
+
+    yesBtn.addEventListener("click", () => {
+      question.classList.add("hidden");
+      success.classList.remove("hidden");
+
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight - 30 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 2800);
+      }
+    });
+
+    noBtn.addEventListener("mouseover", () => {
+      const offsetX = (Math.random() - 0.5) * 220;
+      const offsetY = (Math.random() - 0.5) * 120;
+
+      noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+
+    noBtn.addEventListener("click", () => {
+      noCount++;
+      noBtn.textContent = noTexts[Math.min(noCount, noTexts.length - 1)];
+
+      if (noCount >= noTexts.length - 1) {
+        noBtn.style.opacity = "0.3";
+        noBtn.style.pointerEvents = "none";
+      }
+    });
+  </script>
+</body>
+</html>
